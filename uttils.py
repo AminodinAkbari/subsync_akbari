@@ -30,5 +30,5 @@ def final_list_creator(list):
 def listing(arg):
 	listed = []
 	for i in arg:
-		listed.append([f"{i.start} \n {i.content}\n"])
+		listed.append([f"{i.start} \n {pulishing(i.content)}\n "])
 	return listed

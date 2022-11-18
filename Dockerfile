@@ -8,4 +8,5 @@ RUN pip install --no-cache-dir --upgrade -r /subsync_akbari/requirements.txt
 
 COPY . /subsync_akbari
 
-CMD ["uvicorn", "main.main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "9003"]
+CMD ["uvicorn", "main.main:app","--root-path /subsync_akbari/" , "--proxy-headers", "--host", "0.0.0.0", "--port", "8004"]
+

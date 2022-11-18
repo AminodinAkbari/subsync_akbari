@@ -1,5 +1,6 @@
-from fastapi import FastAPI , UploadFile
+from fastapi import FastAPI ,Request ,  UploadFile
 from uttils import remove_microsecond , final_list_creator , listing
+from fastapi.openapi.utils import get_openapi
 import shutil
 import srt
 
@@ -38,21 +39,11 @@ def uploadfile(file1 : UploadFile , file2 : UploadFile):
 		i.start = remove_microsecond(i.start)
 		i.end = remove_microsecond(i.end)
 
-
-	# a = open(f"files/{namesub1}edited" , "a")
-	# a.write(srt.compose(en_list))
-	# a.close()
-
-	# b = open(f"files/{namesub2}edited" , "a")
-	# b.write(srt.compose(de_list))
-	# b.close()
-
-
-	# first = open(f"files/{namesub1}edited")
-	# second = open(f"files/{namesub2}edited")
-
-
 	return {
 		f"{file1.filename}":listing(en_list),
 		f"{file2.filename}":listing(de_list),
 	}
+
+@app.get("/get_root_path")
+def read_main(request: Request):
+    return {"message": "This Message Show Your root_path and be used In Proxy Servers", "root_path": request.scope.get("root_path")}
